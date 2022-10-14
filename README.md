@@ -3,7 +3,7 @@
 > Create a console app with a DAL, using the Repository pattern.
 > 
 > - [ ] The app will use the Employee database we created earlier
-> - [ ] The app should allow the user to choose from a menu of options
+> - [x] The app should allow the user to choose from a menu of options
 >     - [ ] Option 1:  See a list of all employees and their Addresses and
 >       Start Dates
 >     - [ ] Option 2:  See all employees who live in a certain state
