@@ -10,10 +10,10 @@ namespace EmployeeApp.Business
         private readonly EmployeeRepository _employeeRepository = new EmployeeRepository();
         private readonly AddressBLL _addressBLL = new AddressBLL();
 
-        public Employee GetEmployeeById(int employeeId)
+        public IEmployee GetEmployeeById(int employeeId)
         {
             EmployeeDTO dto = _employeeRepository.GetEmployeeById(employeeId);
-            Employee employee = new Employee()
+            IEmployee employee = new Employee()
             {
                 FirstName = dto.FirstName,
                 MiddleName = dto.MiddleName,
