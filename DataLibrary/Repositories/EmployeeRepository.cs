@@ -1,4 +1,6 @@
-﻿using DataLibrary.DTOs;
+﻿using System.Collections.Generic;
+
+using DataLibrary.DTOs;
 
 namespace DataLibrary.Repositories
 {
@@ -9,6 +11,14 @@ namespace DataLibrary.Repositories
             EmployeeDTO employee = new EmployeeDTO() { Id = employeeId };
 
             return employee;
+        }
+
+        public List<EmployeeDTO> GetAllEmployees()
+        {
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
+            employees.Add(GetEmployeeById(0));
+
+            return employees;
         }
     }
 }

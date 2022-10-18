@@ -35,7 +35,7 @@ namespace EmployeeApp
                 {
                     case "1":
                         Console.WriteLine("All employees:");
-                        resultEmployees.Add(employeeBLL.GetEmployeeById(0));
+                        resultEmployees = employeeBLL.GetAllEmployees();
                         resultEmployees[0].LastName = "I AM EVERYONE";
                         break;
                     case "2":
