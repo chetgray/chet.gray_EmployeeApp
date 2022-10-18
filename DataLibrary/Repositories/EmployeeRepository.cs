@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using DataLibrary.DTOs;
 
@@ -25,6 +26,16 @@ namespace DataLibrary.Repositories
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
             employees.Add(GetById(0));
+
+            return employees;
+        }
+
+        public List<EmployeeDTO> GetByStartDateAfter(DateTime date)
+        {
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
+            employees.Add(GetById(0));
+            employees[0].LastName = $"I started after {date:yyyy-MM-dd}";
+            employees[0].EmploymentStartDate = date.AddDays(1);
 
             return employees;
         }

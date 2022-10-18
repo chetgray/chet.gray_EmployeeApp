@@ -56,8 +56,7 @@ namespace EmployeeApp
                             Console.Write("» ");
                         }
                         Console.WriteLine($"Employees who started after {date}:");
-                        resultEmployees.Add(employeeBLL.GetById(0));
-                        resultEmployees[0].EmploymentStartDate = DateTime.Today.AddYears(-10);
+                        resultEmployees = employeeBLL.GetByStartDateAfter(date);
                         break;
                     case "4":
                         shouldContinueApp = false;

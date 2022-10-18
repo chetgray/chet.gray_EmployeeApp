@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using DataLibrary.DTOs;
 using DataLibrary.Repositories;
@@ -34,6 +35,18 @@ namespace EmployeeApp.Business
         public List<IEmployee> GetByState(string state)
         {
             List<EmployeeDTO> dtos = _employeeRepository.GetByState(state);
+            List<IEmployee> employees = new List<IEmployee>();
+            foreach (EmployeeDTO dto in dtos)
+            {
+                employees.Add(ConvertToModel(dto));
+            }
+
+            return employees;
+        }
+
+        internal List<IEmployee> GetByStartDateAfter(DateTime date)
+        {
+            List<EmployeeDTO> dtos = _employeeRepository.GetByStartDateAfter(date);
             List<IEmployee> employees = new List<IEmployee>();
             foreach (EmployeeDTO dto in dtos)
             {
