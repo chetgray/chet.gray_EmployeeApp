@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using EmployeeApp.Business;
 using EmployeeApp.Models;
 
 namespace EmployeeApp
@@ -9,6 +10,8 @@ namespace EmployeeApp
     {
         static void Main()
         {
+            EmployeeBLL employeeBLL = new EmployeeBLL();
+
             Console.WriteLine("Welcome to the Employee App!");
 
             List<IEmployee> resultEmployees = new List<IEmployee>();
@@ -32,19 +35,16 @@ namespace EmployeeApp
                 {
                     case "1":
                         Console.WriteLine("All employees:");
-                        resultEmployees.Add(new Employee() { LastName = "I AM EVERYONE!" });
+                        resultEmployees.Add(employeeBLL.GetEmployeeById(0));
+                        resultEmployees[0].LastName = "I AM EVERYONE";
                         break;
                     case "2":
                         Console.Write("What state would you like to search for?\n» ");
                         string state = Console.ReadLine();
                         Console.WriteLine($"Employees who live in {state}:");
-                        resultEmployees.Add(
-                            new Employee()
-                            {
-                                LastName = "I live in KY",
-                                Address = new Address() { State = "KY" }
-                            }
-                        );
+                        resultEmployees.Add(employeeBLL.GetEmployeeById(0));
+                        resultEmployees[0].LastName = "I live in KY";
+                        resultEmployees[0].Address.State = "KY";
                         break;
                     case "3":
                         Console.WriteLine("What date would you like to search for?");
@@ -56,13 +56,8 @@ namespace EmployeeApp
                             Console.Write("» ");
                         }
                         Console.WriteLine($"Employees who started after {date}:");
-                        resultEmployees.Add(
-                            new Employee()
-                            {
-                                LastName = "I started a decade ago",
-                                EmploymentStartDate = DateTime.Today.AddYears(-10)
-                            }
-                        );
+                        resultEmployees.Add(employeeBLL.GetEmployeeById(0));
+                        resultEmployees[0].EmploymentStartDate = DateTime.Today.AddYears(-10);
                         break;
                     case "4":
                         shouldContinueApp = false;
