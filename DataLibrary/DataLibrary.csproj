@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{80BC0E6F-7DCD-4452-8BD4-8AB563F6386F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>EmployeeApp</RootNamespace>
-    <AssemblyName>EmployeeApp</AssemblyName>
+    <ProjectGuid>{FED9933B-33AA-4F1C-90B8-62E683D66ACE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataLibrary</RootNamespace>
+    <AssemblyName>DataLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,22 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\AddressBLL.cs" />
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\IAddress.cs" />
-    <Compile Include="Models\IEmployee.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DTOs\AddressDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataLibrary\DataLibrary.csproj">
-      <Project>{fed9933b-33aa-4f1c-90b8-62e683d66ace}</Project>
-      <Name>DataLibrary</Name>
-    </ProjectReference>
+    <Compile Include="Repositories\AddressRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
