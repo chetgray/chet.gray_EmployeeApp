@@ -11,10 +11,9 @@ namespace EmployeeApp
         static void Main()
         {
             EmployeeBLL employeeBLL = new EmployeeBLL();
+            List<IEmployee> resultEmployees = new List<IEmployee>();
 
             Console.WriteLine("Welcome to the Employee App!");
-
-            List<IEmployee> resultEmployees = new List<IEmployee>();
             bool shouldContinueApp = true;
             bool shouldPrintMenu = true;
             do
@@ -37,12 +36,14 @@ namespace EmployeeApp
                         Console.WriteLine("All employees:");
                         resultEmployees = employeeBLL.GetAll();
                         break;
+
                     case "2":
                         Console.Write("What state would you like to search for?\n» ");
                         string state = Console.ReadLine();
                         Console.WriteLine($"Employees who live in {state}:");
                         resultEmployees = employeeBLL.GetByState(state);
                         break;
+
                     case "3":
                         Console.WriteLine("What date would you like to search for?");
                         Console.Write("» ");
@@ -55,9 +56,11 @@ namespace EmployeeApp
                         Console.WriteLine($"Employees who started after {date}:");
                         resultEmployees = employeeBLL.GetByStartDateAfter(date);
                         break;
+
                     case "4":
                         shouldContinueApp = false;
                         break;
+
                     default:
                         Console.WriteLine("ERROR: Invalid selection.");
                         shouldPrintMenu = false;

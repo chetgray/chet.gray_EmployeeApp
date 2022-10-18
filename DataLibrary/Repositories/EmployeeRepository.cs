@@ -17,6 +17,7 @@ namespace DataLibrary.Repositories
         public List<EmployeeDTO> GetAll()
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
+
             employees.Add(GetById(0));
             employees[0].LastName = "I AM EVERYONE";
 
@@ -26,6 +27,7 @@ namespace DataLibrary.Repositories
         public List<EmployeeDTO> GetByState(string state)
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
+
             employees.Add(GetById(0));
             employees[0].LastName = $"I live in {state}";
 
@@ -35,6 +37,7 @@ namespace DataLibrary.Repositories
         public List<EmployeeDTO> GetByStartDateAfter(DateTime date)
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
+
             employees.Add(GetById(0));
             employees[0].LastName = $"I started after {date:yyyy-MM-dd}";
             employees[0].EmploymentStartDate = date.AddDays(1);

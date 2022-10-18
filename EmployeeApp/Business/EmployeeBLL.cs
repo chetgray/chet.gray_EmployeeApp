@@ -25,10 +25,12 @@ namespace EmployeeApp.Business
         {
             List<EmployeeDTO> dtos = _employeeRepository.GetAll();
             List<IEmployee> employees = new List<IEmployee>();
+
             foreach (EmployeeDTO dto in dtos)
             {
                 employees.Add(ConvertToModel(dto));
             }
+
             return employees;
         }
 
@@ -36,10 +38,10 @@ namespace EmployeeApp.Business
         {
             List<EmployeeDTO> dtos = _employeeRepository.GetByState(state);
             List<IEmployee> employees = new List<IEmployee>();
-            IEmployee employee;
+
             foreach (EmployeeDTO dto in dtos)
             {
-                employee = ConvertToModel(dto);
+                IEmployee employee = ConvertToModel(dto);
                 employee.Address = new Address() { State = state };
                 employees.Add(employee);
             }
@@ -51,6 +53,7 @@ namespace EmployeeApp.Business
         {
             List<EmployeeDTO> dtos = _employeeRepository.GetByStartDateAfter(date);
             List<IEmployee> employees = new List<IEmployee>();
+
             foreach (EmployeeDTO dto in dtos)
             {
                 employees.Add(ConvertToModel(dto));
