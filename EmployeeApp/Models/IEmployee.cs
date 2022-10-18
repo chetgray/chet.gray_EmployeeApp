@@ -9,9 +9,9 @@ namespace EmployeeApp.Models
         string LastName { get; set; }
         string FullName { get; }
 
-        DateTime DateOfBirth { get; set; }
-        DateTime EmploymentStartDate { get; set; }
-        DateTime EmploymentEndDate { get; set; }
+        DateTime? DateOfBirth { get; set; }
+        DateTime? EmploymentStartDate { get; set; }
+        DateTime? EmploymentEndDate { get; set; }
 
         IAddress Address { get; set; }
     }

@@ -11,9 +11,9 @@ namespace EmployeeApp.Models
         {
             get => $"{FirstName} {MiddleName} {LastName}";
         }
-        public DateTime DateOfBirth { get; set; }
-        public DateTime EmploymentStartDate { get; set; }
-        public DateTime EmploymentEndDate { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public DateTime? EmploymentStartDate { get; set; }
+        public DateTime? EmploymentEndDate { get; set; }
         public IAddress Address { get; set; }
     }
 }
