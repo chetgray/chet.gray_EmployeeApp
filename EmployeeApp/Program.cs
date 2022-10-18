@@ -44,7 +44,7 @@ namespace EmployeeApp
                         Console.WriteLine($"Employees who live in {state}:");
                         resultEmployees.Add(employeeBLL.GetEmployeeById(0));
                         resultEmployees[0].LastName = "I live in KY";
-                        resultEmployees[0].Address.State = "KY";
+                        resultEmployees[0].Address = new Address() { State = "KY" };
                         break;
                     case "3":
                         Console.WriteLine("What date would you like to search for?");
