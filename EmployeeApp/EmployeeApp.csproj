@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\AddressBLL.cs" />
+    <Compile Include="Business\EmployeeBLL.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IAddress.cs" />
