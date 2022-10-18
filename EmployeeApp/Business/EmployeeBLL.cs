@@ -15,6 +15,24 @@ namespace EmployeeApp.Business
         public IEmployee GetEmployeeById(int employeeId)
         {
             EmployeeDTO dto = _employeeRepository.GetEmployeeById(employeeId);
+            IEmployee employee = ConvertToModel(dto);
+
+            return employee;
+        }
+
+        public List<IEmployee> GetAllEmployees()
+        {
+            List<EmployeeDTO> dtos = _employeeRepository.GetAllEmployees();
+            List<IEmployee> employees = new List<IEmployee>();
+            foreach (EmployeeDTO dto in dtos)
+            {
+                employees.Add(ConvertToModel(dto));
+            }
+            return employees;
+        }
+
+        private IEmployee ConvertToModel(EmployeeDTO dto)
+        {
             IEmployee employee = new Employee()
             {
                 FirstName = dto.FirstName,
@@ -28,32 +46,8 @@ namespace EmployeeApp.Business
             {
                 employee.Address = _addressBLL.GetAddressById(dto.AddressId.Value);
             }
-            return employee;
-        }
 
-        public List<IEmployee> GetAllEmployees()
-        {
-            List<EmployeeDTO> dtos = _employeeRepository.GetAllEmployees();
-            List<IEmployee> employees = new List<IEmployee>();
-            IEmployee employee;
-            foreach (EmployeeDTO dto in dtos)
-            {
-                employee = new Employee()
-                {
-                    FirstName = dto.FirstName,
-                    MiddleName = dto.MiddleName,
-                    LastName = dto.LastName,
-                    DateOfBirth = dto.DateOfBirth,
-                    EmploymentStartDate = dto.EmploymentStartDate,
-                    EmploymentEndDate = dto.EmploymentEndDate
-                };
-                if (dto.AddressId.HasValue)
-                {
-                    employee.Address = _addressBLL.GetAddressById(dto.AddressId.Value);
-                }
-                employees.Add(employee);
-            }
-            return employees;
+            return employee;
         }
     }
 }
