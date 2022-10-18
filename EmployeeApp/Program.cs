@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using EmployeeApp.Models;
 
 namespace EmployeeApp
 {
@@ -8,6 +10,7 @@ namespace EmployeeApp
         {
             Console.WriteLine("Welcome to the Employee App!");
 
+            List<IEmployee> resultEmployees = new List<IEmployee>();
             bool shouldContinueApp = true;
             bool shouldPrintMenu = true;
             do
@@ -28,13 +31,19 @@ namespace EmployeeApp
                 {
                     case "1":
                         Console.WriteLine("All employees:");
-                        Console.WriteLine("<EMPLOYEES>");
+                        resultEmployees.Add(new Employee() { LastName = "I AM EVERYONE!" });
                         break;
                     case "2":
                         Console.Write("What state would you like to search for?\n» ");
                         string state = Console.ReadLine();
                         Console.WriteLine($"Employees who live in {state}:");
-                        Console.WriteLine("<EMPLOYEES>");
+                        resultEmployees.Add(
+                            new Employee()
+                            {
+                                LastName = "I live in KY",
+                                Address = new Address() { State = "KY" }
+                            }
+                        );
                         break;
                     case "3":
                         Console.WriteLine("What date would you like to search for?");
@@ -46,7 +55,13 @@ namespace EmployeeApp
                             Console.Write("» ");
                         }
                         Console.WriteLine($"Employees who started after {date}:");
-                        Console.WriteLine("<EMPLOYEES>");
+                        resultEmployees.Add(
+                            new Employee()
+                            {
+                                LastName = "I started a decade ago",
+                                EmploymentStartDate = DateTime.Today.AddYears(-10)
+                            }
+                        );
                         break;
                     case "4":
                         shouldContinueApp = false;
@@ -56,11 +71,25 @@ namespace EmployeeApp
                         shouldPrintMenu = false;
                         continue;
                 }
+                WriteEmployees(resultEmployees);
                 shouldPrintMenu = true;
+                resultEmployees.Clear();
             } while (shouldContinueApp);
 
             Console.WriteLine("Thank you for using the Employee App!");
             Console.ReadKey(intercept: true);
+        }
+
+        private static void WriteEmployees(IEnumerable<IEmployee> employees)
+        {
+            foreach (IEmployee employee in employees)
+            {
+                Console.WriteLine(
+                    $"{employee.FullName}\t"
+                        + $"Address: {employee.Address?.FullAddress}\t"
+                        + $"Started: {employee.EmploymentStartDate:yyyy-MM-dd}"
+                );
+            }
         }
     }
 }
