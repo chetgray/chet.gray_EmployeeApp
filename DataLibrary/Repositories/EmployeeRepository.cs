@@ -18,6 +18,7 @@ namespace DataLibrary.Repositories
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
             employees.Add(GetById(0));
+            employees[0].LastName = "I AM EVERYONE";
 
             return employees;
         }
@@ -26,6 +27,7 @@ namespace DataLibrary.Repositories
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
             employees.Add(GetById(0));
+            employees[0].LastName = $"I live in {state}";
 
             return employees;
         }

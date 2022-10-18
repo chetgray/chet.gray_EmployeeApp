@@ -36,9 +36,12 @@ namespace EmployeeApp.Business
         {
             List<EmployeeDTO> dtos = _employeeRepository.GetByState(state);
             List<IEmployee> employees = new List<IEmployee>();
+            IEmployee employee;
             foreach (EmployeeDTO dto in dtos)
             {
-                employees.Add(ConvertToModel(dto));
+                employee = ConvertToModel(dto);
+                employee.Address = new Address() { State = state };
+                employees.Add(employee);
             }
 
             return employees;

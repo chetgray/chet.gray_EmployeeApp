@@ -36,15 +36,12 @@ namespace EmployeeApp
                     case "1":
                         Console.WriteLine("All employees:");
                         resultEmployees = employeeBLL.GetAll();
-                        resultEmployees[0].LastName = "I AM EVERYONE";
                         break;
                     case "2":
                         Console.Write("What state would you like to search for?\n» ");
                         string state = Console.ReadLine();
                         Console.WriteLine($"Employees who live in {state}:");
                         resultEmployees = employeeBLL.GetByState(state);
-                        resultEmployees[0].LastName = "I live in KY";
-                        resultEmployees[0].Address = new Address() { State = "KY" };
                         break;
                     case "3":
                         Console.WriteLine("What date would you like to search for?");
