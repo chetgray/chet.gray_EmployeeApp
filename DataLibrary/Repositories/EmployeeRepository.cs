@@ -6,17 +6,17 @@ namespace DataLibrary.Repositories
 {
     public class EmployeeRepository
     {
-        public EmployeeDTO GetEmployeeById(int employeeId)
+        public EmployeeDTO GetById(int employeeId)
         {
             EmployeeDTO employee = new EmployeeDTO() { Id = employeeId };
 
             return employee;
         }
 
-        public List<EmployeeDTO> GetAllEmployees()
+        public List<EmployeeDTO> GetAll()
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
-            employees.Add(GetEmployeeById(0));
+            employees.Add(GetById(0));
 
             return employees;
         }

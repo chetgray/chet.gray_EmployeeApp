@@ -12,17 +12,17 @@ namespace EmployeeApp.Business
         private readonly EmployeeRepository _employeeRepository = new EmployeeRepository();
         private readonly AddressBLL _addressBLL = new AddressBLL();
 
-        public IEmployee GetEmployeeById(int employeeId)
+        public IEmployee GetById(int employeeId)
         {
-            EmployeeDTO dto = _employeeRepository.GetEmployeeById(employeeId);
+            EmployeeDTO dto = _employeeRepository.GetById(employeeId);
             IEmployee employee = ConvertToModel(dto);
 
             return employee;
         }
 
-        public List<IEmployee> GetAllEmployees()
+        public List<IEmployee> GetAll()
         {
-            List<EmployeeDTO> dtos = _employeeRepository.GetAllEmployees();
+            List<EmployeeDTO> dtos = _employeeRepository.GetAll();
             List<IEmployee> employees = new List<IEmployee>();
             foreach (EmployeeDTO dto in dtos)
             {
@@ -44,7 +44,7 @@ namespace EmployeeApp.Business
             };
             if (dto.AddressId.HasValue)
             {
-                employee.Address = _addressBLL.GetAddressById(dto.AddressId.Value);
+                employee.Address = _addressBLL.GetById(dto.AddressId.Value);
             }
 
             return employee;

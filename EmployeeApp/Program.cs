@@ -35,14 +35,14 @@ namespace EmployeeApp
                 {
                     case "1":
                         Console.WriteLine("All employees:");
-                        resultEmployees = employeeBLL.GetAllEmployees();
+                        resultEmployees = employeeBLL.GetAll();
                         resultEmployees[0].LastName = "I AM EVERYONE";
                         break;
                     case "2":
                         Console.Write("What state would you like to search for?\n» ");
                         string state = Console.ReadLine();
                         Console.WriteLine($"Employees who live in {state}:");
-                        resultEmployees.Add(employeeBLL.GetEmployeeById(0));
+                        resultEmployees.Add(employeeBLL.GetById(0));
                         resultEmployees[0].LastName = "I live in KY";
                         resultEmployees[0].Address = new Address() { State = "KY" };
                         break;
@@ -56,7 +56,7 @@ namespace EmployeeApp
                             Console.Write("» ");
                         }
                         Console.WriteLine($"Employees who started after {date}:");
-                        resultEmployees.Add(employeeBLL.GetEmployeeById(0));
+                        resultEmployees.Add(employeeBLL.GetById(0));
                         resultEmployees[0].EmploymentStartDate = DateTime.Today.AddYears(-10);
                         break;
                     case "4":

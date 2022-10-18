@@ -9,9 +9,9 @@ namespace EmployeeApp.Business
     {
         private readonly AddressRepository _addressRepository = new AddressRepository();
 
-        public IAddress GetAddressById(int addressId)
+        public IAddress GetById(int addressId)
         {
-            AddressDTO dto = _addressRepository.GetAddressById(addressId);
+            AddressDTO dto = _addressRepository.GetById(addressId);
             IAddress address = ConvertToModel(dto);
 
             return address;
