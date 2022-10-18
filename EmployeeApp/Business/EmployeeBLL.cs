@@ -31,6 +31,18 @@ namespace EmployeeApp.Business
             return employees;
         }
 
+        public List<IEmployee> GetByState(string state)
+        {
+            List<EmployeeDTO> dtos = _employeeRepository.GetByState(state);
+            List<IEmployee> employees = new List<IEmployee>();
+            foreach (EmployeeDTO dto in dtos)
+            {
+                employees.Add(ConvertToModel(dto));
+            }
+
+            return employees;
+        }
+
         private IEmployee ConvertToModel(EmployeeDTO dto)
         {
             IEmployee employee = new Employee()

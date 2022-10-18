@@ -20,5 +20,13 @@ namespace DataLibrary.Repositories
 
             return employees;
         }
+
+        public List<EmployeeDTO> GetByState(string state)
+        {
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
+            employees.Add(GetById(0));
+
+            return employees;
+        }
     }
 }

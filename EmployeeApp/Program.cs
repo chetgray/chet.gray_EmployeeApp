@@ -42,7 +42,7 @@ namespace EmployeeApp
                         Console.Write("What state would you like to search for?\n» ");
                         string state = Console.ReadLine();
                         Console.WriteLine($"Employees who live in {state}:");
-                        resultEmployees.Add(employeeBLL.GetById(0));
+                        resultEmployees = employeeBLL.GetByState(state);
                         resultEmployees[0].LastName = "I live in KY";
                         resultEmployees[0].Address = new Address() { State = "KY" };
                         break;
