@@ -39,6 +39,13 @@ namespace DataLibrary.DAL
                         {
                             object[] record = new object[reader.FieldCount];
                             reader.GetValues(record);
+                            for (int i = 0; i < record.Length; i++)
+                            {
+                                if (record[i] == System.DBNull.Value)
+                                {
+                                    record[i] = null;
+                                }
+                            }
                             records.Add(record);
                         }
                     }
