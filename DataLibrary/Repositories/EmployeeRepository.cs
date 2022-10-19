@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 
-using DataLibrary.DAL;
 using DataLibrary.DTOs;
 
 namespace DataLibrary.Repositories
 {
-    public class EmployeeRepository
+    public class EmployeeRepository : BaseRepository
     {
         public EmployeeDTO GetById(int employeeId)
         {
-            EmployeeAppDAL dal = new EmployeeAppDAL(
-                ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
-            );
-            List<object[]> records = dal.GetRecordsViaStoredProcedure(
+            List<object[]> records = _dal.GetRecordsViaStoredProcedure(
                 "spEmployeeGetById",
                 new Dictionary<string, object>() { { "@employeeId", employeeId } }
             );
@@ -41,10 +36,7 @@ namespace DataLibrary.Repositories
         public List<EmployeeDTO> GetAll()
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
-            EmployeeAppDAL dal = new EmployeeAppDAL(
-                ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
-            );
-            List<object[]> records = dal.GetRecordsViaStoredProcedure(
+            List<object[]> records = _dal.GetRecordsViaStoredProcedure(
                 "spEmployeeGetAll",
                 new Dictionary<string, object>()
             );
@@ -84,10 +76,7 @@ namespace DataLibrary.Repositories
         public List<EmployeeDTO> GetByState(string state)
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
-            EmployeeAppDAL dal = new EmployeeAppDAL(
-                ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
-            );
-            List<object[]> records = dal.GetRecordsViaStoredProcedure(
+            List<object[]> records = _dal.GetRecordsViaStoredProcedure(
                 "spEmployeeGetByState",
                 new Dictionary<string, object> { { "@state", state } }
             );
@@ -127,10 +116,7 @@ namespace DataLibrary.Repositories
         public List<EmployeeDTO> GetByStartDateAfter(DateTime startDate)
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
-            EmployeeAppDAL dal = new EmployeeAppDAL(
-                ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
-            );
-            List<object[]> records = dal.GetRecordsViaStoredProcedure(
+            List<object[]> records = _dal.GetRecordsViaStoredProcedure(
                 "spEmployeeGetByStartDateAfter",
                 new Dictionary<string, object> { { "@startDate", startDate } }
             );
