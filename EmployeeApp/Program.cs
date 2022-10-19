@@ -21,7 +21,8 @@ namespace EmployeeApp
                 if (shouldPrintMenu)
                 {
                     Console.WriteLine(
-                        "Options:\n"
+                        "\n"
+                            + "Options:\n"
                             + "- [1] See a list of all employees and their Addresses and Start Dates\n"
                             + "- [2] See all employees who live in a certain state\n"
                             + "- [3] See all employees who started after a certain date\n"
@@ -33,14 +34,14 @@ namespace EmployeeApp
                 switch (input)
                 {
                     case "1":
-                        Console.WriteLine("All employees:");
+                        Console.WriteLine("\nAll employees:");
                         resultEmployees = employeeBLL.GetAll();
                         break;
 
                     case "2":
                         Console.Write("What state would you like to search for?\n» ");
                         string state = Console.ReadLine();
-                        Console.WriteLine($"Employees who live in {state}:");
+                        Console.WriteLine($"\nEmployees who live in {state}:");
                         resultEmployees = employeeBLL.GetByState(state);
                         break;
 
@@ -53,7 +54,7 @@ namespace EmployeeApp
                             Console.WriteLine("ERROR: Invalid date format.");
                             Console.Write("» ");
                         }
-                        Console.WriteLine($"Employees who started after {date}:");
+                        Console.WriteLine($"\nEmployees who started after {date}:");
                         resultEmployees = employeeBLL.GetByStartDateAfter(date);
                         break;
 
