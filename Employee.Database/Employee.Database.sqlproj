@@ -68,6 +68,7 @@
     <Build Include="dbo\Tables\Address.sql" />
     <Build Include="dbo\Stored Procedures\GetEmployeeDataByStartDateOnOrAfter.sql" />
     <Build Include="dbo\Stored Procedures\AddEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\spAddressGetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Employee.Database.local.publish.xml" />
