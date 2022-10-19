@@ -70,6 +70,7 @@
     <Build Include="dbo\Stored Procedures\AddEmployee.sql" />
     <Build Include="dbo\Stored Procedures\spAddressGetById.sql" />
     <Build Include="dbo\Stored Procedures\spEmployeeGetById.sql" />
+    <Build Include="dbo\Stored Procedures\spEmployeeGetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Employee.Database.local.publish.xml" />
