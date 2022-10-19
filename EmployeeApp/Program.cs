@@ -54,7 +54,7 @@ namespace EmployeeApp
                             Console.WriteLine("ERROR: Invalid date format.");
                             Console.Write("» ");
                         }
-                        Console.WriteLine($"\nEmployees who started after {date}:");
+                        Console.WriteLine($"\nEmployees who started after {date:yyyy-MM-dd}:");
                         resultEmployees = employeeBLL.GetByStartDateAfter(date);
                         break;
 
