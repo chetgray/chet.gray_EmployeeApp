@@ -42,7 +42,7 @@ namespace EmployeeApp.Business
             foreach (EmployeeDTO dto in dtos)
             {
                 IEmployee employee = ConvertToModel(dto);
-                employee.Address = new Address() { State = state };
+                employee.Address.State = state;
                 employees.Add(employee);
             }
 

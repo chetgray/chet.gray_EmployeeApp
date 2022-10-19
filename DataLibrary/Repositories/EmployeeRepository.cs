@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 
+using DataLibrary.DAL;
 using DataLibrary.DTOs;
 
 namespace DataLibrary.Repositories
@@ -9,7 +11,29 @@ namespace DataLibrary.Repositories
     {
         public EmployeeDTO GetById(int employeeId)
         {
-            EmployeeDTO employee = new EmployeeDTO() { Id = employeeId };
+            EmployeeAppDAL dal = new EmployeeAppDAL(
+                ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
+            );
+            List<object[]> records = dal.GetRecordsViaStoredProcedure(
+                "spEmployeeGetById",
+                new Dictionary<string, object>() { { "@employeeId", employeeId } }
+            );
+
+            if (records.Count == 0)
+            {
+                return null;
+            }
+            EmployeeDTO employee = new EmployeeDTO
+            {
+                Id = (int)records[0][0],
+                FirstName = (string)records[0][1],
+                MiddleName = (string)records[0][2],
+                LastName = (string)records[0][3],
+                DateOfBirth = DateTime.Parse((string)records[0][4]),
+                EmploymentStartDate = DateTime.Parse((string)records[0][5]),
+                EmploymentEndDate = DateTime.Parse((string)records[0][6]),
+                AddressId = (int?)records[0][7]
+            };
 
             return employee;
         }
@@ -18,8 +42,8 @@ namespace DataLibrary.Repositories
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
 
-            employees.Add(GetById(0));
-            employees[0].LastName = "I AM EVERYONE";
+            employees.Add(GetById(1));
+            employees[0].MiddleName = "\"I AM EVERYONE\"";
 
             return employees;
         }
@@ -28,8 +52,8 @@ namespace DataLibrary.Repositories
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
 
-            employees.Add(GetById(0));
-            employees[0].LastName = $"I live in {state}";
+            employees.Add(GetById(1));
+            employees[0].MiddleName = $"\"I live in {state}\"";
 
             return employees;
         }
@@ -38,8 +62,8 @@ namespace DataLibrary.Repositories
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
 
-            employees.Add(GetById(0));
-            employees[0].LastName = $"I started after {date:yyyy-MM-dd}";
+            employees.Add(GetById(1));
+            employees[0].MiddleName = $"\"I started after {date:yyyy-MM-dd}\"";
             employees[0].EmploymentStartDate = date.AddDays(1);
 
             return employees;
