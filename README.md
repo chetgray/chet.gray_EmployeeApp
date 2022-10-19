@@ -4,7 +4,7 @@
 > 
 > - [x] The app will use the Employee database we created earlier
 > - [x] The app should allow the user to choose from a menu of options
->     - [ ] Option 1:  See a list of all employees and their Addresses and
+>     - [x] Option 1:  See a list of all employees and their Addresses and
 >       Start Dates
 >     - [ ] Option 2:  See all employees who live in a certain state
 >     - [ ] Option 3:  See all employees who started after a certain date

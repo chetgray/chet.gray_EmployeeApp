@@ -79,10 +79,15 @@ namespace EmployeeApp
         {
             foreach (IEmployee employee in employees)
             {
+                string dateString = "<none>";
+                if (!(employee.EmploymentStartDate is null))
+                {
+                    dateString = ((DateTime)employee.EmploymentStartDate).ToString("yyyy-MM-dd");
+                }
                 Console.WriteLine(
                     $"{employee.FullName}\t"
-                        + $"Address: {employee.Address?.FullAddress}\t"
-                        + $"Started: {employee.EmploymentStartDate:yyyy-MM-dd}"
+                        + $"Address: {employee.Address?.FullAddress ?? "<none>"}\t"
+                        + $"Started: {dateString}"
                 );
             }
         }
