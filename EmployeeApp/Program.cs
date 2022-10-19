@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using EmployeeApp.Business;
 using EmployeeApp.Models;
@@ -67,7 +68,10 @@ namespace EmployeeApp
                         shouldPrintMenu = false;
                         continue;
                 }
-                WriteEmployees(resultEmployees);
+                if (shouldContinueApp)
+                {
+                    WriteEmployees(resultEmployees);
+                }
                 shouldPrintMenu = true;
                 resultEmployees.Clear();
             } while (shouldContinueApp);
@@ -78,6 +82,27 @@ namespace EmployeeApp
 
         private static void WriteEmployees(IEnumerable<IEmployee> employees)
         {
+            if (!employees.Any())
+            {
+                Console.WriteLine("<none>");
+                return;
+            }
+
+            int nameWidth = 0;
+            int addressWidth = 0;
+            foreach (IEmployee employee in employees)
+            {
+                int nameLength = employee.FullName.Length;
+                if (nameWidth < nameLength)
+                {
+                    nameWidth = nameLength;
+                }
+                int addressLength = employee.Address?.FullAddress.Length ?? 0;
+                if (addressWidth < addressLength)
+                {
+                    addressWidth = addressLength;
+                }
+            }
             foreach (IEmployee employee in employees)
             {
                 string dateString = "<none>";
@@ -86,8 +111,11 @@ namespace EmployeeApp
                     dateString = ((DateTime)employee.EmploymentStartDate).ToString("yyyy-MM-dd");
                 }
                 Console.WriteLine(
-                    $"{employee.FullName}\t"
-                        + $"Address: {employee.Address?.FullAddress ?? "<none>"}\t"
+                    string.Format($"{{0,{-nameWidth}}}\t", employee.FullName)
+                        + string.Format(
+                            $"Address: {{0,{-addressWidth}}}\t",
+                            employee.Address?.FullAddress ?? "<none>"
+                        )
                         + $"Started: {dateString}"
                 );
             }
