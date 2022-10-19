@@ -124,13 +124,45 @@ namespace DataLibrary.Repositories
             return employees;
         }
 
-        public List<EmployeeDTO> GetByStartDateAfter(DateTime date)
+        public List<EmployeeDTO> GetByStartDateAfter(DateTime startDate)
         {
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
+            EmployeeAppDAL dal = new EmployeeAppDAL(
+                ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
+            );
+            List<object[]> records = dal.GetRecordsViaStoredProcedure(
+                "spEmployeeGetByStartDateAfter",
+                new Dictionary<string, object> { { "@startDate", startDate } }
+            );
 
-            employees.Add(GetById(1));
-            employees[0].MiddleName = $"\"I started after {date:yyyy-MM-dd}\"";
-            employees[0].EmploymentStartDate = date.AddDays(1);
+            foreach (object[] record in records)
+            {
+                EmployeeDTO employee = new EmployeeDTO
+                {
+                    Id = (int)record[0],
+                    FirstName = (string)record[1],
+                    MiddleName = (string)record[2],
+                    LastName = (string)record[3],
+                    //DateOfBirth = DateTime.Parse((string)record[4]),
+                    //EmploymentStartDate = DateTime.Parse((string)record[5]),
+                    //EmploymentEndDate = DateTime.Parse((string)record[6]),
+                    AddressId = (int?)record[7]
+                };
+                DateTime date;
+                if (DateTime.TryParse((string)record[4], out date))
+                {
+                    employee.DateOfBirth = date;
+                }
+                if (DateTime.TryParse((string)record[5], out date))
+                {
+                    employee.EmploymentStartDate = date;
+                }
+                if (DateTime.TryParse((string)record[6], out date))
+                {
+                    employee.EmploymentEndDate = date;
+                }
+                employees.Add(employee);
+            }
 
             return employees;
         }
