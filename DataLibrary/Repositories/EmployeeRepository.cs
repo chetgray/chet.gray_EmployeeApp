@@ -18,17 +18,7 @@ namespace DataLibrary.Repositories
             {
                 return null;
             }
-            EmployeeDTO employee = new EmployeeDTO
-            {
-                Id = (int)records[0][0],
-                FirstName = (string)records[0][1],
-                MiddleName = (string)records[0][2],
-                LastName = (string)records[0][3],
-                DateOfBirth = DateTime.Parse((string)records[0][4]),
-                EmploymentStartDate = DateTime.Parse((string)records[0][5]),
-                EmploymentEndDate = DateTime.Parse((string)records[0][6]),
-                AddressId = (int?)records[0][7]
-            };
+            EmployeeDTO employee = ConvertToDto(records[0]);
 
             return employee;
         }
@@ -43,31 +33,7 @@ namespace DataLibrary.Repositories
 
             foreach (object[] record in records)
             {
-                EmployeeDTO employee = new EmployeeDTO
-                {
-                    Id = (int)record[0],
-                    FirstName = (string)record[1],
-                    MiddleName = (string)record[2],
-                    LastName = (string)record[3],
-                    //DateOfBirth = DateTime.Parse((string)record[4]),
-                    //EmploymentStartDate = DateTime.Parse((string)record[5]),
-                    //EmploymentEndDate = DateTime.Parse((string)record[6]),
-                    AddressId = (int?)record[7]
-                };
-                DateTime date;
-                if (DateTime.TryParse((string)record[4], out date))
-                {
-                    employee.DateOfBirth = date;
-                }
-                if (DateTime.TryParse((string)record[5], out date))
-                {
-                    employee.EmploymentStartDate = date;
-                }
-                if (DateTime.TryParse((string)record[6], out date))
-                {
-                    employee.EmploymentEndDate = date;
-                }
-                employees.Add(employee);
+                employees.Add(ConvertToDto(record));
             }
 
             return employees;
@@ -83,31 +49,7 @@ namespace DataLibrary.Repositories
 
             foreach (object[] record in records)
             {
-                EmployeeDTO employee = new EmployeeDTO
-                {
-                    Id = (int)record[0],
-                    FirstName = (string)record[1],
-                    MiddleName = (string)record[2],
-                    LastName = (string)record[3],
-                    //DateOfBirth = DateTime.Parse((string)record[4]),
-                    //EmploymentStartDate = DateTime.Parse((string)record[5]),
-                    //EmploymentEndDate = DateTime.Parse((string)record[6]),
-                    AddressId = (int?)record[7]
-                };
-                DateTime date;
-                if (DateTime.TryParse((string)record[4], out date))
-                {
-                    employee.DateOfBirth = date;
-                }
-                if (DateTime.TryParse((string)record[5], out date))
-                {
-                    employee.EmploymentStartDate = date;
-                }
-                if (DateTime.TryParse((string)record[6], out date))
-                {
-                    employee.EmploymentEndDate = date;
-                }
-                employees.Add(employee);
+                employees.Add(ConvertToDto(record));
             }
 
             return employees;
@@ -123,34 +65,40 @@ namespace DataLibrary.Repositories
 
             foreach (object[] record in records)
             {
-                EmployeeDTO employee = new EmployeeDTO
-                {
-                    Id = (int)record[0],
-                    FirstName = (string)record[1],
-                    MiddleName = (string)record[2],
-                    LastName = (string)record[3],
-                    //DateOfBirth = DateTime.Parse((string)record[4]),
-                    //EmploymentStartDate = DateTime.Parse((string)record[5]),
-                    //EmploymentEndDate = DateTime.Parse((string)record[6]),
-                    AddressId = (int?)record[7]
-                };
-                DateTime date;
-                if (DateTime.TryParse((string)record[4], out date))
-                {
-                    employee.DateOfBirth = date;
-                }
-                if (DateTime.TryParse((string)record[5], out date))
-                {
-                    employee.EmploymentStartDate = date;
-                }
-                if (DateTime.TryParse((string)record[6], out date))
-                {
-                    employee.EmploymentEndDate = date;
-                }
-                employees.Add(employee);
+                employees.Add(ConvertToDto(record));
             }
 
             return employees;
+        }
+
+        private static EmployeeDTO ConvertToDto(object[] record)
+        {
+            EmployeeDTO employee = new EmployeeDTO
+            {
+                Id = (int)record[0],
+                FirstName = (string)record[1],
+                MiddleName = (string)record[2],
+                LastName = (string)record[3],
+                //DateOfBirth = DateTime.Parse((string)record[4]),
+                //EmploymentStartDate = DateTime.Parse((string)record[5]),
+                //EmploymentEndDate = DateTime.Parse((string)record[6]),
+                AddressId = (int?)record[7]
+            };
+            DateTime date;
+            if (DateTime.TryParse((string)record[4], out date))
+            {
+                employee.DateOfBirth = date;
+            }
+            if (DateTime.TryParse((string)record[5], out date))
+            {
+                employee.EmploymentStartDate = date;
+            }
+            if (DateTime.TryParse((string)record[6], out date))
+            {
+                employee.EmploymentEndDate = date;
+            }
+
+            return employee;
         }
     }
 }
