@@ -2,19 +2,19 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DataLibrary.DAL
+namespace EmployeeApp.Data.DataAccess
 {
-    internal class EmployeeAppDAL : IEmployeeAppDAL
+    internal class DAL : IDAL
     {
-        private string _connectionString;
+        private readonly string _connectionString;
 
-        public EmployeeAppDAL(string connectionString)
+        public DAL(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public List<object[]> GetRecordsViaStoredProcedure(
-            string storedProcedure,
+        public List<object[]> GetRecordListFromStoredProcedure(
+            string storedProcedureName,
             Dictionary<string, object> parameters
         )
         {
@@ -23,14 +23,15 @@ namespace DataLibrary.DAL
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(storedProcedure, connection)
+                SqlCommand command = new SqlCommand(storedProcedureName, connection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                foreach (var parameter in parameters)
+                foreach (KeyValuePair<string, object> parameter in parameters)
                 {
                     command.Parameters.AddWithValue(parameter.Key, parameter.Value);
                 }
+
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -46,6 +47,7 @@ namespace DataLibrary.DAL
                                     record[i] = null;
                                 }
                             }
+
                             records.Add(record);
                         }
                     }

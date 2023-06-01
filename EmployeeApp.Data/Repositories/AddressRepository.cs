@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 
-using DataLibrary.DTOs;
+using EmployeeApp.Data.DTOs;
 
-namespace DataLibrary.Repositories
+namespace EmployeeApp.Data.Repositories
 {
-    public class AddressRepository : BaseRepository
+    public class AddressRepository : RepositoryBase
     {
         public AddressDTO GetById(int addressId)
         {
-            List<object[]> records = _dal.GetRecordsViaStoredProcedure(
+            List<object[]> records = _dal.GetRecordListFromStoredProcedure(
                 "dbo.spAddressGetById",
                 new Dictionary<string, object> { { "@addressId", addressId } }
             );
@@ -17,8 +17,8 @@ namespace DataLibrary.Repositories
             {
                 return null;
             }
-            AddressDTO address = ConvertToDto(records[0]);
 
+            AddressDTO address = ConvertToDto(records[0]);
             return address;
         }
 

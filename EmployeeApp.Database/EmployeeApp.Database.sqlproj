@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>Employee.Database</Name>
+    <Name>EmployeeApp.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{d0b66e74-365b-43e5-8123-61dee237617e}</ProjectGuid>
@@ -11,8 +11,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>Employee.Database</RootNamespace>
-    <AssemblyName>Employee.Database</AssemblyName>
+    <RootNamespace>EmployeeApp.Database</RootNamespace>
+    <AssemblyName>EmployeeApp.Database</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -75,6 +75,6 @@
     <Build Include="dbo\Stored Procedures\spEmployeeGetByStartDateAfter.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Employee.Database.local.publish.xml" />
+    <None Include="EmployeeApp.Database.local.publish.xml" />
   </ItemGroup>
 </Project>

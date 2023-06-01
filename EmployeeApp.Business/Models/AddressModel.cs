@@ -1,6 +1,6 @@
-﻿namespace EmployeeApp.Models
+﻿namespace EmployeeApp.Business.Models
 {
-    internal class Address : IAddress
+    public class AddressModel : IAddressModel
     {
         public string StreetAddress { get; set; }
         public string City { get; set; }

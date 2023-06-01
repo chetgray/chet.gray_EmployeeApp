@@ -1,6 +1,6 @@
-﻿namespace EmployeeApp.Models
+﻿namespace EmployeeApp.Business.Models
 {
-    public interface IAddress
+    public interface IAddressModel
     {
         string StreetAddress { get; set; }
         string City { get; set; }

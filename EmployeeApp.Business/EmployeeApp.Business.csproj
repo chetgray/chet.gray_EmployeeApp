@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FED9933B-33AA-4F1C-90B8-62E683D66ACE}</ProjectGuid>
+    <ProjectGuid>{2F454ECA-91F9-4170-ACB4-C747829BB7EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataLibrary</RootNamespace>
-    <AssemblyName>DataLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>EmployeeApp.Business</RootNamespace>
+    <AssemblyName>EmployeeApp.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,14 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\EmployeeAppDAL.cs" />
-    <Compile Include="DAL\IEmployeeAppDAL.cs" />
-    <Compile Include="DTOs\AddressDTO.cs" />
-    <Compile Include="DTOs\EmployeeDTO.cs" />
+    <Compile Include="AddressBLL.cs" />
+    <Compile Include="EmployeeBLL.cs" />
+    <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\IAddressModel.cs" />
+    <Compile Include="Models\IEmployeeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AddressRepository.cs" />
-    <Compile Include="Repositories\BaseRepository.cs" />
-    <Compile Include="Repositories\EmployeeRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeApp.Data\EmployeeApp.Data.csproj">
+      <Project>{fed9933b-33aa-4f1c-90b8-62e683d66ace}</Project>
+      <Name>EmployeeApp.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
