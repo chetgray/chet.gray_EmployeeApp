@@ -2,7 +2,7 @@
 
 namespace EmployeeApp.Data.DTOs
 {
-    public class EmployeeDTO
+    public class EmployeeDTO : IEmployeeDTO
     {
         public int Id { get; set; }
 

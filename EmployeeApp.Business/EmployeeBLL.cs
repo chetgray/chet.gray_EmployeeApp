@@ -7,17 +7,17 @@ using EmployeeApp.Data.Repositories;
 
 namespace EmployeeApp.Business
 {
-    public class EmployeeBLL
+    public class EmployeeBLL : IEmployeeBLL
     {
-        private readonly AddressBLL _addressBLL = new AddressBLL();
-        private readonly EmployeeRepository _employeeRepository = new EmployeeRepository();
+        private readonly IAddressBLL _addressBLL = new AddressBLL();
+        private readonly IEmployeeRepository _employeeRepository = new EmployeeRepository();
 
-        public List<IEmployeeModel> GetAll()
+        public IList<IEmployeeModel> GetAll()
         {
-            List<EmployeeDTO> dtos = _employeeRepository.GetAll();
-            List<IEmployeeModel> employees = new List<IEmployeeModel>();
+            IList<IEmployeeDTO> dtos = _employeeRepository.GetAll();
+            IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
-            foreach (EmployeeDTO dto in dtos)
+            foreach (IEmployeeDTO dto in dtos)
             {
                 employees.Add(ConvertToModel(dto));
             }
@@ -27,18 +27,18 @@ namespace EmployeeApp.Business
 
         public IEmployeeModel GetById(int employeeId)
         {
-            EmployeeDTO dto = _employeeRepository.GetById(employeeId);
+            IEmployeeDTO dto = _employeeRepository.GetById(employeeId);
             IEmployeeModel employee = ConvertToModel(dto);
 
             return employee;
         }
 
-        public List<IEmployeeModel> GetByStartDateAfter(DateTime date)
+        public IList<IEmployeeModel> GetByStartDateAfter(DateTime date)
         {
-            List<EmployeeDTO> dtos = _employeeRepository.GetByStartDateAfter(date);
-            List<IEmployeeModel> employees = new List<IEmployeeModel>();
+            IList<IEmployeeDTO> dtos = _employeeRepository.GetByStartDateAfter(date);
+            IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
-            foreach (EmployeeDTO dto in dtos)
+            foreach (IEmployeeDTO dto in dtos)
             {
                 employees.Add(ConvertToModel(dto));
             }
@@ -46,12 +46,12 @@ namespace EmployeeApp.Business
             return employees;
         }
 
-        public List<IEmployeeModel> GetByState(string state)
+        public IList<IEmployeeModel> GetByState(string state)
         {
-            List<EmployeeDTO> dtos = _employeeRepository.GetByState(state);
-            List<IEmployeeModel> employees = new List<IEmployeeModel>();
+            IList<IEmployeeDTO> dtos = _employeeRepository.GetByState(state);
+            IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
-            foreach (EmployeeDTO dto in dtos)
+            foreach (IEmployeeDTO dto in dtos)
             {
                 IEmployeeModel employee = ConvertToModel(dto);
                 employee.Address.State = state;
@@ -61,7 +61,7 @@ namespace EmployeeApp.Business
             return employees;
         }
 
-        private IEmployeeModel ConvertToModel(EmployeeDTO dto)
+        private IEmployeeModel ConvertToModel(IEmployeeDTO dto)
         {
             IEmployeeModel employee = new EmployeeModel()
             {

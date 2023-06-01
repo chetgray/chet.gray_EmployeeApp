@@ -9,7 +9,7 @@ Inversion
 > implement Dependency Inversion.
 >
 > - I recommend making a separate copy.
-> - [ ] Use Interfaces for all of your classes.
+> - [x] Use Interfaces for all of your classes.
 > - [ ] Create a Factory.
 > - [ ] There should be no "newing" except for the Factory (and SQL
 >   Parameters :) )

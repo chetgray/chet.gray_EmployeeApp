@@ -2,11 +2,11 @@
 
 namespace EmployeeApp.Data.DataAccess
 {
-    internal interface IDAL
+    public interface IDAL
     {
-        List<object[]> GetRecordListFromStoredProcedure(
+        IList<object[]> GetRecordListFromStoredProcedure(
             string storedProcedureName,
-            Dictionary<string, object> parameters
+            IDictionary<string, object> parameters
         );
     }
 }

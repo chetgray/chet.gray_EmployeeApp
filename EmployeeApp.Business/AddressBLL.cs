@@ -4,19 +4,19 @@ using EmployeeApp.Data.Repositories;
 
 namespace EmployeeApp.Business
 {
-    public class AddressBLL
+    public class AddressBLL : IAddressBLL
     {
-        private readonly AddressRepository _addressRepository = new AddressRepository();
+        private readonly IAddressRepository _addressRepository = new AddressRepository();
 
         public IAddressModel GetById(int addressId)
         {
-            AddressDTO dto = _addressRepository.GetById(addressId);
+            IAddressDTO dto = _addressRepository.GetById(addressId);
             IAddressModel address = ConvertToModel(dto);
 
             return address;
         }
 
-        private static IAddressModel ConvertToModel(AddressDTO dto)
+        private static IAddressModel ConvertToModel(IAddressDTO dto)
         {
             IAddressModel address = new AddressModel()
             {

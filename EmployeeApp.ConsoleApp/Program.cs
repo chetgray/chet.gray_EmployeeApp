@@ -11,8 +11,8 @@ namespace EmployeeApp
     {
         private static void Main()
         {
-            EmployeeBLL employeeBLL = new EmployeeBLL();
-            List<IEmployeeModel> resultEmployees = new List<IEmployeeModel>();
+            IEmployeeBLL employeeBLL = new EmployeeBLL();
+            IList<IEmployeeModel> resultEmployees = new List<IEmployeeModel>();
 
             Console.WriteLine("Welcome to the Employee App!");
             bool shouldContinueApp = true;
