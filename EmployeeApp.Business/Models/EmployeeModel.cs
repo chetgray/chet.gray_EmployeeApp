@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EmployeeApp.Models
+namespace EmployeeApp.Business.Models
 {
-    internal class Employee : IEmployee
+    public class EmployeeModel : IEmployeeModel
     {
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -11,7 +11,7 @@ namespace EmployeeApp.Models
         public DateTime? EmploymentStartDate { get; set; }
         public DateTime? EmploymentEndDate { get; set; }
 
-        public IAddress Address { get; set; }
+        public IAddressModel Address { get; set; }
 
         public string FullName
         {

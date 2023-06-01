@@ -1,25 +1,24 @@
-﻿using DataLibrary.DTOs;
-using DataLibrary.Repositories;
-
-using EmployeeApp.Models;
+﻿using EmployeeApp.Business.Models;
+using EmployeeApp.Data.DTOs;
+using EmployeeApp.Data.Repositories;
 
 namespace EmployeeApp.Business
 {
-    internal class AddressBLL
+    public class AddressBLL
     {
         private readonly AddressRepository _addressRepository = new AddressRepository();
 
-        public IAddress GetById(int addressId)
+        public IAddressModel GetById(int addressId)
         {
             AddressDTO dto = _addressRepository.GetById(addressId);
-            IAddress address = ConvertToModel(dto);
+            IAddressModel address = ConvertToModel(dto);
 
             return address;
         }
 
-        private static IAddress ConvertToModel(AddressDTO dto)
+        private static IAddressModel ConvertToModel(AddressDTO dto)
         {
-            IAddress address = new Address()
+            IAddressModel address = new AddressModel()
             {
                 StreetAddress = dto.StreetAddress,
                 City = dto.City,

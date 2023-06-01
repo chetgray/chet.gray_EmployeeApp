@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EmployeeApp.Models
+namespace EmployeeApp.Business.Models
 {
-    internal interface IEmployee
+    public interface IEmployeeModel
     {
         string FirstName { get; set; }
         string MiddleName { get; set; }
@@ -11,7 +11,7 @@ namespace EmployeeApp.Models
         DateTime? EmploymentStartDate { get; set; }
         DateTime? EmploymentEndDate { get; set; }
 
-        IAddress Address { get; set; }
+        IAddressModel Address { get; set; }
 
         string FullName { get; }
     }

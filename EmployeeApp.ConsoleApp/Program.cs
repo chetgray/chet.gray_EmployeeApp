@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 
 using EmployeeApp.Business;
-using EmployeeApp.Models;
+using EmployeeApp.Business.Models;
 
 namespace EmployeeApp
 {
     internal static class Program
     {
-        static void Main()
+        private static void Main()
         {
             EmployeeBLL employeeBLL = new EmployeeBLL();
-            List<IEmployee> resultEmployees = new List<IEmployee>();
+            List<IEmployeeModel> resultEmployees = new List<IEmployeeModel>();
 
             Console.WriteLine("Welcome to the Employee App!");
             bool shouldContinueApp = true;
@@ -30,6 +30,7 @@ namespace EmployeeApp
                             + "- [4] Exit"
                     );
                 }
+
                 Console.Write("What would you like to do?\n» ");
                 string input = Console.ReadLine();
                 switch (input)
@@ -55,6 +56,7 @@ namespace EmployeeApp
                             Console.WriteLine("ERROR: Invalid date format.");
                             Console.Write("» ");
                         }
+
                         Console.WriteLine($"\nEmployees who started after {date:yyyy-MM-dd}:");
                         resultEmployees = employeeBLL.GetByStartDateAfter(date);
                         break;
@@ -68,10 +70,12 @@ namespace EmployeeApp
                         shouldPrintMenu = false;
                         continue;
                 }
+
                 if (shouldContinueApp)
                 {
                     WriteEmployees(resultEmployees);
                 }
+
                 shouldPrintMenu = true;
                 resultEmployees.Clear();
             } while (shouldContinueApp);
@@ -80,7 +84,7 @@ namespace EmployeeApp
             Console.ReadKey(intercept: true);
         }
 
-        private static void WriteEmployees(IEnumerable<IEmployee> employees)
+        private static void WriteEmployees(IEnumerable<IEmployeeModel> employees)
         {
             if (!employees.Any())
             {
@@ -90,26 +94,31 @@ namespace EmployeeApp
 
             int nameWidth = 0;
             int addressWidth = 0;
-            foreach (IEmployee employee in employees)
+            foreach (IEmployeeModel employee in employees)
             {
                 int nameLength = employee.FullName.Length;
                 if (nameWidth < nameLength)
                 {
                     nameWidth = nameLength;
                 }
+
                 int addressLength = employee.Address?.FullAddress.Length ?? 0;
                 if (addressWidth < addressLength)
                 {
                     addressWidth = addressLength;
                 }
             }
-            foreach (IEmployee employee in employees)
+
+            foreach (IEmployeeModel employee in employees)
             {
                 string dateString = "<none>";
                 if (!(employee.EmploymentStartDate is null))
                 {
-                    dateString = ((DateTime)employee.EmploymentStartDate).ToString("yyyy-MM-dd");
+                    dateString = ((DateTime)employee.EmploymentStartDate).ToString(
+                        "yyyy-MM-dd"
+                    );
                 }
+
                 Console.WriteLine(
                     string.Format($"{{0,{-nameWidth}}}\t", employee.FullName)
                         + string.Format(
