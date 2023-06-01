@@ -12,7 +12,7 @@ Injection with Unity
 >   Factories in. Otherwise it's going to get real confusing real fast.
 > - [ ] Use the Unity Container for Dependency Injection.
 > - [ ] Create the Unity Bootstrapper class like I showed you.
-> - [ ] Remember, everything should be done via Interfaces to maintain
+> - [x] Remember, everything should be done via Interfaces to maintain
 >   Abstraction. This means you're going to have to change several
 >   places that pass the actual class to pass the Interface instead.
 > - Don't worry about Interfaces for primary types like `List<>` - you

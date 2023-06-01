@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AddressBLL.cs" />
     <Compile Include="EmployeeBLL.cs" />
+    <Compile Include="IAddressBLL.cs" />
+    <Compile Include="IEmployeeBLL.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\IAddressModel.cs" />

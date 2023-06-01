@@ -6,7 +6,7 @@ namespace EmployeeApp.Data.Repositories
 {
     public class RepositoryBase
     {
-        internal readonly IDAL _dal = new DAL(
+        protected readonly IDAL _dal = new DAL(
             ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
         );
     }

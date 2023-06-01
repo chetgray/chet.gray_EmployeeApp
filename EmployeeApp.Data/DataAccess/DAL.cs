@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace EmployeeApp.Data.DataAccess
 {
-    internal class DAL : IDAL
+    public class DAL : IDAL
     {
         private readonly string _connectionString;
 
@@ -13,12 +13,12 @@ namespace EmployeeApp.Data.DataAccess
             _connectionString = connectionString;
         }
 
-        public List<object[]> GetRecordListFromStoredProcedure(
+        public IList<object[]> GetRecordListFromStoredProcedure(
             string storedProcedureName,
-            Dictionary<string, object> parameters
+            IDictionary<string, object> parameters
         )
         {
-            List<object[]> records = new List<object[]>();
+            IList<object[]> records = new List<object[]>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {

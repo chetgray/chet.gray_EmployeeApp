@@ -4,11 +4,11 @@ using EmployeeApp.Data.DTOs;
 
 namespace EmployeeApp.Data.Repositories
 {
-    public class AddressRepository : RepositoryBase
+    public class AddressRepository : RepositoryBase, IAddressRepository
     {
-        public AddressDTO GetById(int addressId)
+        public IAddressDTO GetById(int addressId)
         {
-            List<object[]> records = _dal.GetRecordListFromStoredProcedure(
+            IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
                 "dbo.spAddressGetById",
                 new Dictionary<string, object> { { "@addressId", addressId } }
             );
@@ -18,13 +18,13 @@ namespace EmployeeApp.Data.Repositories
                 return null;
             }
 
-            AddressDTO address = ConvertToDto(records[0]);
+            IAddressDTO address = ConvertToDto(records[0]);
             return address;
         }
 
-        private static AddressDTO ConvertToDto(object[] record)
+        private static IAddressDTO ConvertToDto(object[] record)
         {
-            AddressDTO address = new AddressDTO
+            IAddressDTO address = new AddressDTO
             {
                 Id = (int)record[0],
                 StreetAddress = (string)record[1],

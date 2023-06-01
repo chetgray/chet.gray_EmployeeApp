@@ -1,6 +1,6 @@
 ﻿namespace EmployeeApp.Data.DTOs
 {
-    public class AddressDTO
+    public class AddressDTO : IAddressDTO
     {
         public int Id { get; set; }
 
