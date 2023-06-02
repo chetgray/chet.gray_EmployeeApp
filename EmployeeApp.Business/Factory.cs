@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using EmployeeApp.Business.BusinessLogic;
 using EmployeeApp.Business.Models;
@@ -46,6 +47,12 @@ namespace EmployeeApp.Business
                 Address = address
             };
             return model;
+        }
+
+        public static IList<IEmployeeModel> GetNewEmployeeModelList()
+        {
+            IList<IEmployeeModel> list = new List<IEmployeeModel>();
+            return list;
         }
 
         public static IAddressBLL GetNewAddressBLL(IAddressRepository repository)

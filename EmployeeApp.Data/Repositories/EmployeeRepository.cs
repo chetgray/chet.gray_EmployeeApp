@@ -12,7 +12,7 @@ namespace EmployeeApp.Data.Repositories
 
         public IList<IEmployeeDTO> GetAll()
         {
-            IList<IEmployeeDTO> employees = new List<IEmployeeDTO>();
+            IList<IEmployeeDTO> employees = Factory.GetNewEmployeeDTOList();
             IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
                 "spEmployeeGetAll",
                 new Dictionary<string, object>()
@@ -44,7 +44,7 @@ namespace EmployeeApp.Data.Repositories
 
         public IList<IEmployeeDTO> GetByStartDateAfter(DateTime startDate)
         {
-            IList<IEmployeeDTO> employees = new List<IEmployeeDTO>();
+            IList<IEmployeeDTO> employees = Factory.GetNewEmployeeDTOList();
             IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
                 "spEmployeeGetByStartDateAfter",
                 new Dictionary<string, object> { { "@startDate", startDate } }
@@ -60,7 +60,7 @@ namespace EmployeeApp.Data.Repositories
 
         public IList<IEmployeeDTO> GetByState(string state)
         {
-            IList<IEmployeeDTO> employees = new List<IEmployeeDTO>();
+            IList<IEmployeeDTO> employees = Factory.GetNewEmployeeDTOList();
             IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
                 "spEmployeeGetByState",
                 new Dictionary<string, object> { { "@state", state } }

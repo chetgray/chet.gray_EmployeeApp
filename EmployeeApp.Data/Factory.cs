@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using EmployeeApp.Data.DataAccess;
 using EmployeeApp.Data.DTOs;
@@ -50,6 +51,12 @@ namespace EmployeeApp.Data
                 AddressId = addressId
             };
             return dto;
+        }
+
+        public static IList<IEmployeeDTO> GetNewEmployeeDTOList()
+        {
+            IList<IEmployeeDTO> list = new List<IEmployeeDTO>();
+            return list;
         }
 
         public static IAddressRepository GetNewAddressRepository(IDAL dal)

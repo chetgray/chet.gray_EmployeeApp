@@ -21,7 +21,7 @@ namespace EmployeeApp.Business.BusinessLogic
         public IList<IEmployeeModel> GetAll()
         {
             IList<IEmployeeDTO> dtos = _repository.GetAll();
-            IList<IEmployeeModel> employees = new List<IEmployeeModel>();
+            IList<IEmployeeModel> employees = Factory.GetNewEmployeeModelList();
 
             foreach (IEmployeeDTO dto in dtos)
             {
@@ -42,7 +42,7 @@ namespace EmployeeApp.Business.BusinessLogic
         public IList<IEmployeeModel> GetByStartDateAfter(DateTime date)
         {
             IList<IEmployeeDTO> dtos = _repository.GetByStartDateAfter(date);
-            IList<IEmployeeModel> employees = new List<IEmployeeModel>();
+            IList<IEmployeeModel> employees = Factory.GetNewEmployeeModelList();
 
             foreach (IEmployeeDTO dto in dtos)
             {
@@ -55,7 +55,7 @@ namespace EmployeeApp.Business.BusinessLogic
         public IList<IEmployeeModel> GetByState(string state)
         {
             IList<IEmployeeDTO> dtos = _repository.GetByState(state);
-            IList<IEmployeeModel> employees = new List<IEmployeeModel>();
+            IList<IEmployeeModel> employees = Factory.GetNewEmployeeModelList();
 
             foreach (IEmployeeDTO dto in dtos)
             {

@@ -23,7 +23,7 @@ namespace EmployeeApp
                     )
                 )
             );
-            IList<IEmployeeModel> resultEmployees = new List<IEmployeeModel>();
+            IList<IEmployeeModel> resultEmployees = Business.Factory.GetNewEmployeeModelList();
 
             Console.WriteLine("Welcome to the Employee App!");
             bool shouldContinueApp = true;
