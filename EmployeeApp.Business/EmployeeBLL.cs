@@ -9,12 +9,18 @@ namespace EmployeeApp.Business
 {
     public class EmployeeBLL : IEmployeeBLL
     {
-        private readonly IAddressBLL _addressBLL = new AddressBLL();
-        private readonly IEmployeeRepository _employeeRepository = new EmployeeRepository();
+        private readonly IEmployeeRepository _repository;
+        private readonly IAddressBLL _addressBll;
+
+        public EmployeeBLL(IEmployeeRepository repository, IAddressBLL addressBll)
+        {
+            _repository = repository;
+            _addressBll = addressBll;
+        }
 
         public IList<IEmployeeModel> GetAll()
         {
-            IList<IEmployeeDTO> dtos = _employeeRepository.GetAll();
+            IList<IEmployeeDTO> dtos = _repository.GetAll();
             IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
             foreach (IEmployeeDTO dto in dtos)
@@ -27,7 +33,7 @@ namespace EmployeeApp.Business
 
         public IEmployeeModel GetById(int employeeId)
         {
-            IEmployeeDTO dto = _employeeRepository.GetById(employeeId);
+            IEmployeeDTO dto = _repository.GetById(employeeId);
             IEmployeeModel employee = ConvertToModel(dto);
 
             return employee;
@@ -35,7 +41,7 @@ namespace EmployeeApp.Business
 
         public IList<IEmployeeModel> GetByStartDateAfter(DateTime date)
         {
-            IList<IEmployeeDTO> dtos = _employeeRepository.GetByStartDateAfter(date);
+            IList<IEmployeeDTO> dtos = _repository.GetByStartDateAfter(date);
             IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
             foreach (IEmployeeDTO dto in dtos)
@@ -48,7 +54,7 @@ namespace EmployeeApp.Business
 
         public IList<IEmployeeModel> GetByState(string state)
         {
-            IList<IEmployeeDTO> dtos = _employeeRepository.GetByState(state);
+            IList<IEmployeeDTO> dtos = _repository.GetByState(state);
             IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
             foreach (IEmployeeDTO dto in dtos)
@@ -74,7 +80,7 @@ namespace EmployeeApp.Business
             };
             if (dto.AddressId.HasValue)
             {
-                employee.Address = _addressBLL.GetById(dto.AddressId.Value);
+                employee.Address = _addressBll.GetById(dto.AddressId.Value);
             }
 
             return employee;

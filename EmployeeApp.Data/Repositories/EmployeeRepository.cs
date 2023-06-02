@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using EmployeeApp.Data.DataAccess;
 using EmployeeApp.Data.DTOs;
 
 namespace EmployeeApp.Data.Repositories
 {
     public class EmployeeRepository : RepositoryBase, IEmployeeRepository
     {
+        public EmployeeRepository(IDAL dal) : base(dal) { }
+
         public IList<IEmployeeDTO> GetAll()
         {
             IList<IEmployeeDTO> employees = new List<IEmployeeDTO>();

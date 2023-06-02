@@ -6,11 +6,17 @@ namespace EmployeeApp.Business
 {
     public class AddressBLL : IAddressBLL
     {
-        private readonly IAddressRepository _addressRepository = new AddressRepository();
+        private readonly IAddressRepository _repository;
+
+        public AddressBLL(IAddressRepository repository)
+        {
+            _repository =
+                repository ?? throw new System.ArgumentNullException(nameof(repository));
+        }
 
         public IAddressModel GetById(int addressId)
         {
-            IAddressDTO dto = _addressRepository.GetById(addressId);
+            IAddressDTO dto = _repository.GetById(addressId);
             IAddressModel address = ConvertToModel(dto);
 
             return address;

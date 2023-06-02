@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +55,10 @@
     <ProjectReference Include="..\EmployeeApp.Business\EmployeeApp.Business.csproj">
       <Project>{2f454eca-91f9-4170-acb4-c747829bb7ee}</Project>
       <Name>EmployeeApp.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EmployeeApp.Data\EmployeeApp.Data.csproj">
+      <Project>{FED9933B-33AA-4F1C-90B8-62E683D66ACE}</Project>
+      <Name>EmployeeApp.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

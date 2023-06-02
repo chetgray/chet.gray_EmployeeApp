@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 
 using EmployeeApp.Business;
 using EmployeeApp.Business.Models;
+using EmployeeApp.Data.DataAccess;
+using EmployeeApp.Data.Repositories;
 
 namespace EmployeeApp
 {
@@ -11,7 +14,13 @@ namespace EmployeeApp
     {
         private static void Main()
         {
-            IEmployeeBLL employeeBLL = new EmployeeBLL();
+            IDAL dal = new DAL(
+                ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
+            );
+            IEmployeeBLL employeeBll = new EmployeeBLL(
+                new EmployeeRepository(dal),
+                new AddressBLL(new AddressRepository(dal))
+            );
             IList<IEmployeeModel> resultEmployees = new List<IEmployeeModel>();
 
             Console.WriteLine("Welcome to the Employee App!");
@@ -37,14 +46,14 @@ namespace EmployeeApp
                 {
                     case "1":
                         Console.WriteLine("\nAll employees:");
-                        resultEmployees = employeeBLL.GetAll();
+                        resultEmployees = employeeBll.GetAll();
                         break;
 
                     case "2":
                         Console.Write("What state would you like to search for?\n» ");
                         string state = Console.ReadLine();
                         Console.WriteLine($"\nEmployees who live in {state}:");
-                        resultEmployees = employeeBLL.GetByState(state);
+                        resultEmployees = employeeBll.GetByState(state);
                         break;
 
                     case "3":
@@ -58,7 +67,7 @@ namespace EmployeeApp
                         }
 
                         Console.WriteLine($"\nEmployees who started after {date:yyyy-MM-dd}:");
-                        resultEmployees = employeeBLL.GetByStartDateAfter(date);
+                        resultEmployees = employeeBll.GetByStartDateAfter(date);
                         break;
 
                     case "4":

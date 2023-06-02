@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 
+using EmployeeApp.Data.DataAccess;
 using EmployeeApp.Data.DTOs;
 
 namespace EmployeeApp.Data.Repositories
 {
     public class AddressRepository : RepositoryBase, IAddressRepository
     {
+        public AddressRepository(IDAL dal) : base(dal) { }
+
         public IAddressDTO GetById(int addressId)
         {
             IList<object[]> records = _dal.GetRecordListFromStoredProcedure(

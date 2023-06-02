@@ -13,7 +13,7 @@ Inversion
 > - [ ] Create a Factory.
 > - [ ] There should be no "newing" except for the Factory (and SQL
 >   Parameters :) )
-> - [ ] Pass everything the class needs in via the Constructor and use
+> - [x] Pass everything the class needs in via the Constructor and use
 >   it within the Class (or inject directly into the methods).
 > - Your app should work exactly the same as far as what the user sees.
 > - Note that you WILL break things as you go - your Interfaces, your

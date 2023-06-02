@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -10,7 +11,8 @@ namespace EmployeeApp.Data.DataAccess
 
         public DAL(string connectionString)
         {
-            _connectionString = connectionString;
+            _connectionString =
+                connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
         public IList<object[]> GetRecordListFromStoredProcedure(
@@ -42,7 +44,7 @@ namespace EmployeeApp.Data.DataAccess
                             reader.GetValues(record);
                             for (int i = 0; i < record.Length; i++)
                             {
-                                if (record[i] == System.DBNull.Value)
+                                if (record[i] == DBNull.Value)
                                 {
                                     record[i] = null;
                                 }
