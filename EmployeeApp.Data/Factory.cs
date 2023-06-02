@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 using EmployeeApp.Data.DataAccess;
 using EmployeeApp.Data.DTOs;
@@ -71,10 +72,46 @@ namespace EmployeeApp.Data
             return repository;
         }
 
-        public static IDAL GetNewDAL(string connectionString)
+        public static IDAL GetNewDAL(
+            string connectionString,
+            Func<string, SqlConnection> connectionFactory,
+            Func<string, SqlConnection, SqlCommand> commandFactory,
+            Func<int, object[]> recordFactory,
+            Func<IList<object[]>> recordListFactory
+        )
         {
-            IDAL dal = new DAL(connectionString);
+            IDAL dal = new DAL(
+                connectionString,
+                connectionFactory,
+                commandFactory,
+                recordFactory,
+                recordListFactory
+            );
             return dal;
+        }
+
+        public static SqlConnection GetNewConnection(string connectionString)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            return connection;
+        }
+
+        public static SqlCommand GetNewCommand(string commandText, SqlConnection connection)
+        {
+            SqlCommand command = new SqlCommand(commandText, connection);
+            return command;
+        }
+
+        public static object[] GetNewRecord(int fieldCount)
+        {
+            object[] record = new object[fieldCount];
+            return record;
+        }
+
+        public static IList<object[]> GetNewRecordList()
+        {
+            IList<object[]> list = new List<object[]>();
+            return list;
         }
     }
 }

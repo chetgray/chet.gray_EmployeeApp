@@ -8,11 +8,25 @@ namespace EmployeeApp.Data.DataAccess
     public class DAL : IDAL
     {
         private readonly string _connectionString;
+        public Func<string, SqlConnection> ConnectionFactory { get; set; }
+        public Func<string, SqlConnection, SqlCommand> CommandFactory { get; set; }
+        public Func<int, object[]> RecordFactory { get; set; }
+        public Func<IList<object[]>> RecordListFactory { get; set; }
 
-        public DAL(string connectionString)
+        public DAL(
+            string connectionString,
+            Func<string, SqlConnection> connectionFactory,
+            Func<string, SqlConnection, SqlCommand> commandFactory,
+            Func<int, object[]> recordFactory,
+            Func<IList<object[]>> recordListFactory
+        )
         {
             _connectionString =
                 connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+            ConnectionFactory = connectionFactory;
+            CommandFactory = commandFactory;
+            RecordFactory = recordFactory;
+            RecordListFactory = recordListFactory;
         }
 
         public IList<object[]> GetRecordListFromStoredProcedure(
@@ -20,15 +34,13 @@ namespace EmployeeApp.Data.DataAccess
             IDictionary<string, object> parameters
         )
         {
-            IList<object[]> records = new List<object[]>();
+            IList<object[]> records = RecordListFactory();
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = ConnectionFactory(_connectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(storedProcedureName, connection)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
+                SqlCommand command = CommandFactory(storedProcedureName, connection);
+                command.CommandType = CommandType.StoredProcedure;
                 foreach (KeyValuePair<string, object> parameter in parameters)
                 {
                     command.Parameters.AddWithValue(parameter.Key, parameter.Value);
@@ -40,7 +52,7 @@ namespace EmployeeApp.Data.DataAccess
                     {
                         while (reader.Read())
                         {
-                            object[] record = new object[reader.FieldCount];
+                            object[] record = RecordFactory(reader.FieldCount);
                             reader.GetValues(record);
                             for (int i = 0; i < record.Length; i++)
                             {

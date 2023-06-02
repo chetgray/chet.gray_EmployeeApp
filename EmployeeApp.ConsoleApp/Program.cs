@@ -16,10 +16,24 @@ namespace EmployeeApp
                 "EmployeeDatabase"
             ].ConnectionString;
             IEmployeeBLL employeeBll = Business.Factory.GetNewEmployeeBLL(
-                Data.Factory.GetNewEmployeeRepository(Data.Factory.GetNewDAL(connectionString)),
+                Data.Factory.GetNewEmployeeRepository(
+                    Data.Factory.GetNewDAL(
+                        connectionString,
+                        Data.Factory.GetNewConnection,
+                        Data.Factory.GetNewCommand,
+                        Data.Factory.GetNewRecord,
+                        Data.Factory.GetNewRecordList
+                    )
+                ),
                 Business.Factory.GetNewAddressBLL(
                     Data.Factory.GetNewAddressRepository(
-                        Data.Factory.GetNewDAL(connectionString)
+                        Data.Factory.GetNewDAL(
+                            connectionString,
+                            Data.Factory.GetNewConnection,
+                            Data.Factory.GetNewCommand,
+                            Data.Factory.GetNewRecord,
+                            Data.Factory.GetNewRecordList
+                        )
                     )
                 )
             );
