@@ -2,7 +2,7 @@
 using EmployeeApp.Data.DTOs;
 using EmployeeApp.Data.Repositories;
 
-namespace EmployeeApp.Business
+namespace EmployeeApp.Business.BusinessLogic
 {
     public class AddressBLL : IAddressBLL
     {
@@ -24,13 +24,12 @@ namespace EmployeeApp.Business
 
         private static IAddressModel ConvertToModel(IAddressDTO dto)
         {
-            IAddressModel address = new AddressModel()
-            {
-                StreetAddress = dto.StreetAddress,
-                City = dto.City,
-                State = dto.State,
-                Zip = dto.Zip
-            };
+            IAddressModel address = Factory.GetNewAddressModel(
+                dto.StreetAddress,
+                dto.City,
+                dto.State,
+                dto.Zip
+            );
 
             return address;
         }

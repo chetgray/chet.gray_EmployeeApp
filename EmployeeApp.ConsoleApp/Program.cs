@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 
-using EmployeeApp.Business;
+using EmployeeApp.Business.BusinessLogic;
 using EmployeeApp.Business.Models;
-using EmployeeApp.Data.DataAccess;
-using EmployeeApp.Data.Repositories;
 
 namespace EmployeeApp
 {
@@ -14,12 +12,16 @@ namespace EmployeeApp
     {
         private static void Main()
         {
-            IDAL dal = new DAL(
-                ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
-            );
-            IEmployeeBLL employeeBll = new EmployeeBLL(
-                new EmployeeRepository(dal),
-                new AddressBLL(new AddressRepository(dal))
+            string connectionString = ConfigurationManager.ConnectionStrings[
+                "EmployeeDatabase"
+            ].ConnectionString;
+            IEmployeeBLL employeeBll = Business.Factory.GetNewEmployeeBLL(
+                Data.Factory.GetNewEmployeeRepository(Data.Factory.GetNewDAL(connectionString)),
+                Business.Factory.GetNewAddressBLL(
+                    Data.Factory.GetNewAddressRepository(
+                        Data.Factory.GetNewDAL(connectionString)
+                    )
+                )
             );
             IList<IEmployeeModel> resultEmployees = new List<IEmployeeModel>();
 

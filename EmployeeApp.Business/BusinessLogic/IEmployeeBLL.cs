@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using EmployeeApp.Business.Models;
 
-namespace EmployeeApp.Business
+namespace EmployeeApp.Business.BusinessLogic
 {
     public interface IEmployeeBLL
     {

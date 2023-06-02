@@ -76,23 +76,22 @@ namespace EmployeeApp.Data.Repositories
 
         private static IEmployeeDTO ConvertToDto(object[] record)
         {
-            IEmployeeDTO employee = new EmployeeDTO
-            {
-                Id = (int)record[0],
-                FirstName = (string)record[1],
-                MiddleName = (string)record[2],
-                LastName = (string)record[3],
-                DateOfBirth = record[4] is null
+            IEmployeeDTO employee = Factory.GetNewEmployeeDTO(
+                id: (int)record[0],
+                firstName: (string)record[1],
+                middleName: (string)record[2],
+                lastName: (string)record[3],
+                dateOfBirth: record[4] is null
                     ? null
                     : (DateTime?)DateTime.Parse((string)record[4]),
-                EmploymentStartDate = record[5] is null
+                employmentStartDate: record[5] is null
                     ? null
                     : (DateTime?)DateTime.Parse((string)record[5]),
-                EmploymentEndDate = record[6] is null
+                employmentEndDate: record[6] is null
                     ? null
                     : (DateTime?)DateTime.Parse((string)record[6]),
-                AddressId = (int?)record[7]
-            };
+                addressId: (int?)record[7]
+            );
 
             return employee;
         }

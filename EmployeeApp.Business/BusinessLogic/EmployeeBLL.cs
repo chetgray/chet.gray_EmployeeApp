@@ -5,7 +5,7 @@ using EmployeeApp.Business.Models;
 using EmployeeApp.Data.DTOs;
 using EmployeeApp.Data.Repositories;
 
-namespace EmployeeApp.Business
+namespace EmployeeApp.Business.BusinessLogic
 {
     public class EmployeeBLL : IEmployeeBLL
     {
@@ -69,15 +69,14 @@ namespace EmployeeApp.Business
 
         private IEmployeeModel ConvertToModel(IEmployeeDTO dto)
         {
-            IEmployeeModel employee = new EmployeeModel()
-            {
-                FirstName = dto.FirstName,
-                MiddleName = dto.MiddleName,
-                LastName = dto.LastName,
-                DateOfBirth = dto.DateOfBirth,
-                EmploymentStartDate = dto.EmploymentStartDate,
-                EmploymentEndDate = dto.EmploymentEndDate
-            };
+            IEmployeeModel employee = Factory.GetNewEmployeeModel(
+                dto.FirstName,
+                dto.MiddleName,
+                dto.LastName,
+                dto.DateOfBirth,
+                dto.EmploymentStartDate,
+                dto.EmploymentEndDate
+            );
             if (dto.AddressId.HasValue)
             {
                 employee.Address = _addressBll.GetById(dto.AddressId.Value);

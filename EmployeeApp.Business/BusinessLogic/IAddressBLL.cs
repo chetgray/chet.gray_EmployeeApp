@@ -1,6 +1,6 @@
 ﻿using EmployeeApp.Business.Models;
 
-namespace EmployeeApp.Business
+namespace EmployeeApp.Business.BusinessLogic
 {
     public interface IAddressBLL
     {

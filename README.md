@@ -10,7 +10,7 @@ Inversion
 >
 > - I recommend making a separate copy.
 > - [x] Use Interfaces for all of your classes.
-> - [ ] Create a Factory.
+> - [x] Create a Factory.
 > - [ ] There should be no "newing" except for the Factory (and SQL
 >   Parameters :) )
 > - [x] Pass everything the class needs in via the Constructor and use
