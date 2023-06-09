@@ -8,7 +8,7 @@ namespace EmployeeApp.Data.Repositories
     {
         public IAddressDTO GetById(int addressId)
         {
-            IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
+            IList<object[]> records = Dal.GetRecordListFromStoredProcedure(
                 "dbo.spAddressGetById",
                 new Dictionary<string, object> { { "@addressId", addressId } }
             );
@@ -24,14 +24,12 @@ namespace EmployeeApp.Data.Repositories
 
         private static IAddressDTO ConvertToDto(object[] record)
         {
-            IAddressDTO address = new AddressDTO
-            {
-                Id = (int)record[0],
-                StreetAddress = (string)record[1],
-                City = (string)record[2],
-                State = (string)record[3],
-                Zip = (string)record[4]
-            };
+            IAddressDTO address = UnityBootstrapper.Resolve<IAddressDTO>();
+            address.Id = (int)record[0];
+            address.StreetAddress = (string)record[1];
+            address.City = (string)record[2];
+            address.State = (string)record[3];
+            address.Zip = (string)record[4];
 
             return address;
         }

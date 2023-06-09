@@ -10,7 +10,7 @@ namespace EmployeeApp.Data.Repositories
         public IList<IEmployeeDTO> GetAll()
         {
             IList<IEmployeeDTO> employees = new List<IEmployeeDTO>();
-            IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
+            IList<object[]> records = Dal.GetRecordListFromStoredProcedure(
                 "spEmployeeGetAll",
                 new Dictionary<string, object>()
             );
@@ -25,7 +25,7 @@ namespace EmployeeApp.Data.Repositories
 
         public IEmployeeDTO GetById(int employeeId)
         {
-            IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
+            IList<object[]> records = Dal.GetRecordListFromStoredProcedure(
                 "spEmployeeGetById",
                 new Dictionary<string, object>() { { "@employeeId", employeeId } }
             );
@@ -42,7 +42,7 @@ namespace EmployeeApp.Data.Repositories
         public IList<IEmployeeDTO> GetByStartDateAfter(DateTime startDate)
         {
             IList<IEmployeeDTO> employees = new List<IEmployeeDTO>();
-            IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
+            IList<object[]> records = Dal.GetRecordListFromStoredProcedure(
                 "spEmployeeGetByStartDateAfter",
                 new Dictionary<string, object> { { "@startDate", startDate } }
             );
@@ -58,7 +58,7 @@ namespace EmployeeApp.Data.Repositories
         public IList<IEmployeeDTO> GetByState(string state)
         {
             IList<IEmployeeDTO> employees = new List<IEmployeeDTO>();
-            IList<object[]> records = _dal.GetRecordListFromStoredProcedure(
+            IList<object[]> records = Dal.GetRecordListFromStoredProcedure(
                 "spEmployeeGetByState",
                 new Dictionary<string, object> { { "@state", state } }
             );
@@ -73,23 +73,21 @@ namespace EmployeeApp.Data.Repositories
 
         private static IEmployeeDTO ConvertToDto(object[] record)
         {
-            IEmployeeDTO employee = new EmployeeDTO
-            {
-                Id = (int)record[0],
-                FirstName = (string)record[1],
-                MiddleName = (string)record[2],
-                LastName = (string)record[3],
-                DateOfBirth = record[4] is null
-                    ? null
-                    : (DateTime?)DateTime.Parse((string)record[4]),
-                EmploymentStartDate = record[5] is null
-                    ? null
-                    : (DateTime?)DateTime.Parse((string)record[5]),
-                EmploymentEndDate = record[6] is null
-                    ? null
-                    : (DateTime?)DateTime.Parse((string)record[6]),
-                AddressId = (int?)record[7]
-            };
+            IEmployeeDTO employee = UnityBootstrapper.Resolve<IEmployeeDTO>();
+            employee.Id = (int)record[0];
+            employee.FirstName = (string)record[1];
+            employee.MiddleName = (string)record[2];
+            employee.LastName = (string)record[3];
+            employee.DateOfBirth = record[4] is null
+                ? null
+                : (DateTime?)DateTime.Parse((string)record[4]);
+            employee.EmploymentStartDate = record[5] is null
+                ? null
+                : (DateTime?)DateTime.Parse((string)record[5]);
+            employee.EmploymentEndDate = record[6] is null
+                ? null
+                : (DateTime?)DateTime.Parse((string)record[6]);
+            employee.AddressId = (int?)record[7];
 
             return employee;
         }

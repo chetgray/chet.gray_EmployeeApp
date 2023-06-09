@@ -1,13 +1,12 @@
-﻿using System.Configuration;
+﻿using EmployeeApp.Data.DataAccess;
 
-using EmployeeApp.Data.DataAccess;
+using Unity;
 
 namespace EmployeeApp.Data.Repositories
 {
     public class RepositoryBase
     {
-        protected readonly IDAL _dal = new DAL(
-            ConfigurationManager.ConnectionStrings["EmployeeDatabase"].ConnectionString
-        );
+        [Dependency]
+        public IDAL Dal { get; } = UnityBootstrapper.Resolve<IDAL>();
     }
 }
