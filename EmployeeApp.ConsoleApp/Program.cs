@@ -11,7 +11,7 @@ namespace EmployeeApp
     {
         private static void Main()
         {
-            IEmployeeBLL employeeBLL = new EmployeeBLL();
+            IEmployeeBLL employeeBLL = UnityBootstrapper.Resolve<IEmployeeBLL>();
             IList<IEmployeeModel> resultEmployees = new List<IEmployeeModel>();
 
             Console.WriteLine("Welcome to the Employee App!");

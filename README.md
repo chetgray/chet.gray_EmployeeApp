@@ -10,8 +10,8 @@ Injection with Unity
 >
 > - Start with the original version - NOT the one you did all the
 >   Factories in. Otherwise it's going to get real confusing real fast.
-> - [ ] Use the Unity Container for Dependency Injection.
-> - [ ] Create the Unity Bootstrapper class like I showed you.
+> - [x] Use the Unity Container for Dependency Injection.
+> - [x] Create the Unity Bootstrapper class like I showed you.
 > - [x] Remember, everything should be done via Interfaces to maintain
 >   Abstraction. This means you're going to have to change several
 >   places that pass the actual class to pass the Interface instead.
@@ -35,7 +35,7 @@ Injection with Unity
 >     list to get rid of that Null entry.
 >   - You shouldn't be making many changes to your DataAccess.cs class
 >     as it shouldn’t contain any non-native types.
-> - [ ] Here's how to know if you're done: Go into each of your classes,
+> - [x] Here's how to know if you're done: Go into each of your classes,
 >   including the main Program.cs, and do a find on "new". If you find
 >   yourself "newing" anything that's not a native type (i.e. if you're
 >   "newing" any classes you created), you still have work to do!
