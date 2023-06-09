@@ -5,16 +5,22 @@ using EmployeeApp.Business.Models;
 using EmployeeApp.Data.DTOs;
 using EmployeeApp.Data.Repositories;
 
+using Unity;
+
 namespace EmployeeApp.Business
 {
     public class EmployeeBLL : IEmployeeBLL
     {
-        private readonly IAddressBLL _addressBLL = new AddressBLL();
-        private readonly IEmployeeRepository _employeeRepository = new EmployeeRepository();
+        [Dependency]
+        public IAddressBLL AddressBll { get; } = UnityBootstrapper.Resolve<IAddressBLL>();
+
+        [Dependency]
+        public IEmployeeRepository EmployeeRepository { get; } =
+            UnityBootstrapper.Resolve<IEmployeeRepository>();
 
         public IList<IEmployeeModel> GetAll()
         {
-            IList<IEmployeeDTO> dtos = _employeeRepository.GetAll();
+            IList<IEmployeeDTO> dtos = EmployeeRepository.GetAll();
             IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
             foreach (IEmployeeDTO dto in dtos)
@@ -27,7 +33,7 @@ namespace EmployeeApp.Business
 
         public IEmployeeModel GetById(int employeeId)
         {
-            IEmployeeDTO dto = _employeeRepository.GetById(employeeId);
+            IEmployeeDTO dto = EmployeeRepository.GetById(employeeId);
             IEmployeeModel employee = ConvertToModel(dto);
 
             return employee;
@@ -35,7 +41,7 @@ namespace EmployeeApp.Business
 
         public IList<IEmployeeModel> GetByStartDateAfter(DateTime date)
         {
-            IList<IEmployeeDTO> dtos = _employeeRepository.GetByStartDateAfter(date);
+            IList<IEmployeeDTO> dtos = EmployeeRepository.GetByStartDateAfter(date);
             IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
             foreach (IEmployeeDTO dto in dtos)
@@ -48,7 +54,7 @@ namespace EmployeeApp.Business
 
         public IList<IEmployeeModel> GetByState(string state)
         {
-            IList<IEmployeeDTO> dtos = _employeeRepository.GetByState(state);
+            IList<IEmployeeDTO> dtos = EmployeeRepository.GetByState(state);
             IList<IEmployeeModel> employees = new List<IEmployeeModel>();
 
             foreach (IEmployeeDTO dto in dtos)
@@ -63,18 +69,16 @@ namespace EmployeeApp.Business
 
         private IEmployeeModel ConvertToModel(IEmployeeDTO dto)
         {
-            IEmployeeModel employee = new EmployeeModel()
-            {
-                FirstName = dto.FirstName,
-                MiddleName = dto.MiddleName,
-                LastName = dto.LastName,
-                DateOfBirth = dto.DateOfBirth,
-                EmploymentStartDate = dto.EmploymentStartDate,
-                EmploymentEndDate = dto.EmploymentEndDate
-            };
+            IEmployeeModel employee = UnityBootstrapper.Resolve<IEmployeeModel>();
+            employee.FirstName = dto.FirstName;
+            employee.MiddleName = dto.MiddleName;
+            employee.LastName = dto.LastName;
+            employee.DateOfBirth = dto.DateOfBirth;
+            employee.EmploymentStartDate = dto.EmploymentStartDate;
+            employee.EmploymentEndDate = dto.EmploymentEndDate;
             if (dto.AddressId.HasValue)
             {
-                employee.Address = _addressBLL.GetById(dto.AddressId.Value);
+                employee.Address = AddressBll.GetById(dto.AddressId.Value);
             }
 
             return employee;

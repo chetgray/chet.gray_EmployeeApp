@@ -2,15 +2,19 @@
 using EmployeeApp.Data.DTOs;
 using EmployeeApp.Data.Repositories;
 
+using Unity;
+
 namespace EmployeeApp.Business
 {
     public class AddressBLL : IAddressBLL
     {
-        private readonly IAddressRepository _addressRepository = new AddressRepository();
+        [Dependency]
+        public IAddressRepository AddressRepository { get; } =
+            UnityBootstrapper.Resolve<IAddressRepository>();
 
         public IAddressModel GetById(int addressId)
         {
-            IAddressDTO dto = _addressRepository.GetById(addressId);
+            IAddressDTO dto = AddressRepository.GetById(addressId);
             IAddressModel address = ConvertToModel(dto);
 
             return address;
@@ -18,13 +22,11 @@ namespace EmployeeApp.Business
 
         private static IAddressModel ConvertToModel(IAddressDTO dto)
         {
-            IAddressModel address = new AddressModel()
-            {
-                StreetAddress = dto.StreetAddress,
-                City = dto.City,
-                State = dto.State,
-                Zip = dto.Zip
-            };
+            IAddressModel address = UnityBootstrapper.Resolve<IAddressModel>();
+            address.StreetAddress = dto.StreetAddress;
+            address.City = dto.City;
+            address.State = dto.State;
+            address.Zip = dto.Zip;
 
             return address;
         }
