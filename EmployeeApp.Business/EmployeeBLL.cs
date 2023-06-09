@@ -12,11 +12,10 @@ namespace EmployeeApp.Business
     public class EmployeeBLL : IEmployeeBLL
     {
         [Dependency]
-        public IAddressBLL AddressBll { get; } = UnityBootstrapper.Resolve<IAddressBLL>();
+        public IAddressBLL AddressBll { get; set; }
 
         [Dependency]
-        public IEmployeeRepository EmployeeRepository { get; } =
-            UnityBootstrapper.Resolve<IEmployeeRepository>();
+        public IEmployeeRepository EmployeeRepository { get; set; }
 
         public IList<IEmployeeModel> GetAll()
         {

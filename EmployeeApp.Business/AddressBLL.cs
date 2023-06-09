@@ -9,8 +9,7 @@ namespace EmployeeApp.Business
     public class AddressBLL : IAddressBLL
     {
         [Dependency]
-        public IAddressRepository AddressRepository { get; } =
-            UnityBootstrapper.Resolve<IAddressRepository>();
+        public IAddressRepository AddressRepository { get; set; }
 
         public IAddressModel GetById(int addressId)
         {
